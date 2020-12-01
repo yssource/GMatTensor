@@ -80,7 +80,7 @@ protected:
     std::array<size_t, N + 4> m_shape_tensor4;
 };
 
-// API for pure-tensor with pointer-on;y input
+// API for pure-tensor with pointer-only input
 // Storage convention: (xx, xy, yx, yy)
 namespace pointer {
 

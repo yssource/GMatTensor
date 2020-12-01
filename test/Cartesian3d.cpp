@@ -1,6 +1,7 @@
 
 #include <catch2/catch.hpp>
 #include <xtensor/xrandom.hpp>
+#include <xtensor/xio.hpp>
 #include <GMatTensor/Cartesian3d.h>
 
 #define ISCLOSE(a,b) REQUIRE_THAT((a), Catch::WithinAbs((b), 1e-12));
@@ -221,5 +222,14 @@ TEST_CASE("GMatTensor::Cartesian3d::pointer", "Cartesian3d.h")
         A(0, 1) = 1.0;
         A(1, 0) = 1.0;
         REQUIRE(GM::pointer::A2_ddot_B2(A.data(), A.data()) == Approx(2.0));
+    }
+
+    SECTION("A2_dyadic_B2")
+    {
+        xt::xtensor<double, 2> I2 = GM::I2();
+        xt::xtensor<double, 4> II = GM::II();
+        xt::xtensor<double, 4> C = xt::empty<double>({3, 3, 3, 3});
+        GM::pointer::A2_dyadic_B2(I2.data(), I2.data(), C.data());
+        REQUIRE(xt::allclose(II, C));
     }
 }

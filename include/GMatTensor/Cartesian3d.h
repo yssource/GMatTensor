@@ -80,7 +80,7 @@ protected:
     std::array<size_t, N + 4> m_shape_tensor4;
 };
 
-// API for pure-tensor with pointer-on;y input
+// API for pure-tensor with pointer-only input
 // Storage convention: (xx, xy, xz, yx, yy, yz, zx, zy, zz)
 namespace pointer {
 
@@ -95,6 +95,9 @@ namespace pointer {
 
     template <class T, class U>
     inline auto A2_ddot_B2(const T A, const U B);
+
+    template <class U, class V, class W>
+    inline void A2_dyadic_B2(const U A, const V B, W C);
 
 } // namespace pointer
 
