@@ -29,6 +29,12 @@ Tensor definitions supporting several GMat models.
         - [Optimisation](#optimisation)
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
+- [Change-log](#change-log)
+    - [v0.2.0](#v020)
+        - [Pointer API](#pointer-api)
+    - [v0.1.2](#v012)
+    - [v0.1.1](#v011)
+    - [v0.1.0](#v010)
 
 <!-- /MarkdownTOC -->
 
@@ -278,3 +284,25 @@ c++ `pkg-config --cflags GMatTensor` ...
 
 Note that you have to take care of the *xtensor* dependency, the C++ version, optimization, 
 enabling *xsimd*, ...
+
+# Change-log
+
+## v0.2.0
+
+### Pointer API
+
+*   Making pointer explicit (template `T` -> `T*`).
+*   Adding zero and unit tensors.
+*   Add dyadic product between two second order tensors.
+
+## v0.1.2
+
+*   Adding stride members to `Array`.
+
+## v0.1.1
+
+*   Improved sub-classing support
+
+## v0.1.0 
+
+Transfer from other libraries.
