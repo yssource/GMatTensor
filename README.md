@@ -30,6 +30,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.3.0](#v030)
     - [v0.2.0](#v020)
         - [Pointer API](#pointer-api)
     - [v0.1.2](#v012)
@@ -286,6 +287,11 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.3.0
+
+*   Relaxing assumption on symmetry for dev(A) : dev(A).
+*   Adding symmetric only function `A2s_ddot_B2s` to pointer API.
 
 ## v0.2.0
 
