@@ -294,6 +294,11 @@ enabling *xsimd*, ...
 
 ## v0.4.0
 
+*   Adding "logs".
+*   Unit tensors: now all using pointer API.
+*   Porting all public APIs to array of tensors.
+*   Pointer API: less aggressive templating.
+*   API change: Renaming "equivalent_deviatioric" -> "norm_deviatoric".
 *   Introducing null tensors `GMatTensor::Cartesian3d::O2` and `GMatTensor::Cartesian3d::O4`
     (also for Cartesian2d).
 *   Adding several new tensor operations / products.
