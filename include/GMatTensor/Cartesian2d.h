@@ -73,6 +73,13 @@ inline void deviatoric(const T& A, R& ret);
 template <class T>
 inline auto Deviatoric(const T& A);
 
+// A . B
+template <class T, class R>
+inline void A2_dot_B2(const T& A, const T& B, R& ret);
+
+template <class T>
+inline auto A2_dot_B2(const T& A, const T& B);
+
 // A * B
 template <class T, class R>
 inline void A2_dyadic_B2(const T& A, const T& B, R& ret);
@@ -162,25 +169,25 @@ namespace pointer {
 
     // Trace of second order tensor
     template <class T>
-    inline T trace(const T* A);
+    inline T Trace(const T* A);
 
     // trace(A) / 2
     template <class T>
-    inline T hydrostatic(const T* A);
+    inline T Hydrostatic(const T* A);
 
     // Deviatoric decomposition of second order tensor
     // Returns hydrostatic part
     // "ret" may be the same as "A"
     template <class T>
-    inline T hydrostatic_deviatoric(const T* A, T* ret);
+    inline T Hydrostatic_deviatoric(const T* A, T* ret);
 
     // dev(A) : dev(A)
     template <class T>
-    inline T deviatoric_ddot_deviatoric(const T* A);
+    inline T Deviatoric_ddot_deviatoric(const T* A);
 
     // sqrt(dev(A) : dev(A))
     template <class T>
-    inline T norm_deviatoric(const T* A);
+    inline T Norm_deviatoric(const T* A);
 
     // A : B
     template <class T>
@@ -194,6 +201,10 @@ namespace pointer {
     // A * B
     template <class T>
     inline void A2_dyadic_B2(const T* A, const T* B, T* ret);
+
+    // A . B
+    template <class T>
+    inline void A2_dot_B2(const T* A, const T* B, T* ret);
 
     // A : B
     template <class T>

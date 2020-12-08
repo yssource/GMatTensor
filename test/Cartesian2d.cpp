@@ -31,7 +31,7 @@ TEST_CASE("GMatTensor::Cartesian2d", "Cartesian2d.h")
         REQUIRE(xt::allclose(GM::A4_ddot_B2(Id, A), B - GM::Hydrostatic(B) * I));
     }
 
-    SECTION("trace")
+    SECTION("Trace")
     {
         auto A = GM::Random2();
         A(0, 0) = 1.0;
@@ -67,6 +67,13 @@ TEST_CASE("GMatTensor::Cartesian2d", "Cartesian2d.h")
         auto Is = GM::I4s();
         auto B = xt::eval(0.5 * (A + xt::transpose(A)));
         REQUIRE(xt::allclose(GM::A4_ddot_B2(Is, A), B));
+    }
+
+    SECTION("A2_dot_B2")
+    {
+        auto A = GM::Random2();
+        auto I = GM::I2();
+        REQUIRE(xt::allclose(GM::A2_dot_B2(A, I), A));
     }
 
     SECTION("Deviatoric - Tensor2")
@@ -240,7 +247,7 @@ TEST_CASE("GMatTensor::Cartesian2d::pointer", "Cartesian2d.h")
         REQUIRE(xt::allclose(i, r));
     }
 
-    SECTION("hydrostatic_deviatoric")
+    SECTION("Hydrostatic_deviatoric")
     {
         auto A = GM::Random2();
         auto B = A;
@@ -248,16 +255,16 @@ TEST_CASE("GMatTensor::Cartesian2d::pointer", "Cartesian2d.h")
         double tr = B(0, 0) + B(1, 1);
         B(0, 0) -= 0.5 * tr;
         B(1, 1) -= 0.5 * tr;
-        double m = GM::pointer::hydrostatic_deviatoric(A.data(), C.data());
+        double m = GM::pointer::Hydrostatic_deviatoric(A.data(), C.data());
         REQUIRE(m == Approx(0.5 * tr));
         REQUIRE(xt::allclose(C, B));
     }
 
-    SECTION("deviatoric_ddot_deviatoric")
+    SECTION("Deviatoric_ddot_deviatoric")
     {
         auto A = GM::O2();
         A(0, 1) = 1.0;
         A(1, 0) = 1.0;
-        REQUIRE(GM::pointer::deviatoric_ddot_deviatoric(A.data()) == Approx(2.0));
+        REQUIRE(GM::pointer::Deviatoric_ddot_deviatoric(A.data()) == Approx(2.0));
     }
 }

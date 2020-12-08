@@ -88,42 +88,42 @@ template <class T, class R>
 inline void trace(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret0(A, ret,
-        [](const auto& a){ return pointer::trace(a); });
+        [](const auto& a){ return pointer::Trace(a); });
 }
 
 template <class T>
 inline auto Trace(const T& A)
 {
     return detail::impl_A2<T, 3>::ret0(A,
-        [](const auto& a){ return pointer::trace(a); });
+        [](const auto& a){ return pointer::Trace(a); });
 }
 
 template <class T, class R>
 inline void hydrostatic(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret0(A, ret,
-        [](const auto& a){ return pointer::hydrostatic(a); });
+        [](const auto& a){ return pointer::Hydrostatic(a); });
 }
 
 template <class T>
 inline auto Hydrostatic(const T& A)
 {
     return detail::impl_A2<T, 3>::ret0(A,
-        [](const auto& a){ return pointer::hydrostatic(a); });
+        [](const auto& a){ return pointer::Hydrostatic(a); });
 }
 
 template <class T, class R>
 inline void det(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret0(A, ret,
-        [](const auto& a){ return pointer::det(a); });
+        [](const auto& a){ return pointer::Det(a); });
 }
 
 template <class T>
 inline auto Det(const T& A)
 {
     return detail::impl_A2<T, 3>::ret0(A,
-        [](const auto& a){ return pointer::det(a); });
+        [](const auto& a){ return pointer::Det(a); });
 }
 
 template <class T, class R>
@@ -158,42 +158,42 @@ template <class T, class R>
 inline void norm_deviatoric(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret0(A, ret,
-        [](const auto& a){ return pointer::norm_deviatoric(a); });
+        [](const auto& a){ return pointer::Norm_deviatoric(a); });
 }
 
 template <class T>
 inline auto Norm_deviatoric(const T& A)
 {
     return detail::impl_A2<T, 3>::ret0(A,
-        [](const auto& a){ return pointer::norm_deviatoric(a); });
+        [](const auto& a){ return pointer::Norm_deviatoric(a); });
 }
 
 template <class T, class R>
 inline void deviatoric(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret2(A, ret,
-        [](const auto& a, const auto& r){ return pointer::hydrostatic_deviatoric(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Hydrostatic_deviatoric(a, r); });
 }
 
 template <class T>
 inline auto Deviatoric(const T& A)
 {
     return detail::impl_A2<T, 3>::ret2(A,
-        [](const auto& a, const auto& r){ return pointer::hydrostatic_deviatoric(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Hydrostatic_deviatoric(a, r); });
 }
 
 template <class T, class R>
 inline void inv(const T& A, R& ret)
 {
     return detail::impl_A2<T, 3>::ret2(A, ret,
-        [](const auto& a, const auto& r){ return pointer::inv(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Inv(a, r); });
 }
 
 template <class T>
 inline auto Inv(const T& A)
 {
     return detail::impl_A2<T, 3>::ret2(A,
-        [](const auto& a, const auto& r){ return pointer::inv(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Inv(a, r); });
 }
 
 template <class T, class R>
@@ -531,28 +531,28 @@ namespace pointer {
     }
 
     template <class T>
-    inline T trace(const T* A)
+    inline T Trace(const T* A)
     {
         return A[0] + A[4] + A[8];
     }
 
     template <class T>
-    inline T hydrostatic(const T* A)
+    inline T Hydrostatic(const T* A)
     {
-        return trace(A) / T(3);
+        return Trace(A) / T(3);
     }
 
     template <class T>
-    inline T det(const T* A)
+    inline T Det(const T* A)
     {
         return (A[0] * A[4] * A[8] + A[1] * A[5] * A[6] + A[2] * A[3] * A[7]) -
                (A[2] * A[4] * A[6] + A[1] * A[3] * A[8] + A[0] * A[5] * A[7]);
     }
 
     template <class T>
-    inline T inv(const T* A, T* ret)
+    inline T Inv(const T* A, T* ret)
     {
-        T D = det(A);
+        T D = Det(A);
         ret[0] = (A[4] * A[8] - A[5] * A[7]) / D;
         ret[1] = (A[2] * A[7] - A[1] * A[8]) / D;
         ret[2] = (A[1] * A[5] - A[2] * A[4]) / D;
@@ -566,9 +566,9 @@ namespace pointer {
     }
 
     template <class T>
-    inline T hydrostatic_deviatoric(const T* A, T* ret)
+    inline T Hydrostatic_deviatoric(const T* A, T* ret)
     {
-        T m = hydrostatic(A);
+        T m = Hydrostatic(A);
         ret[0] = A[0] - m;
         ret[1] = A[1];
         ret[2] = A[2];
@@ -582,9 +582,9 @@ namespace pointer {
     }
 
     template <class T>
-    inline T deviatoric_ddot_deviatoric(const T* A)
+    inline T Deviatoric_ddot_deviatoric(const T* A)
     {
-        T m = hydrostatic(A);
+        T m = Hydrostatic(A);
         return (A[0] - m) * (A[0] - m)
              + (A[4] - m) * (A[4] - m)
              + (A[8] - m) * (A[8] - m)
@@ -594,9 +594,9 @@ namespace pointer {
     }
 
     template <class T>
-    inline T norm_deviatoric(const T* A)
+    inline T Norm_deviatoric(const T* A)
     {
-        return std::sqrt(deviatoric_ddot_deviatoric(A));
+        return std::sqrt(Deviatoric_ddot_deviatoric(A));
     }
 
     template <class T>

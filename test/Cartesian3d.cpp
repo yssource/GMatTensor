@@ -305,7 +305,7 @@ TEST_CASE("GMatTensor::Cartesian3d::pointer", "Cartesian3d.h")
         REQUIRE(xt::allclose(i, r));
     }
 
-    SECTION("hydrostatic_deviatoric")
+    SECTION("Hydrostatic_deviatoric")
     {
         auto A = GM::Random2();
         auto B = A;
@@ -314,7 +314,7 @@ TEST_CASE("GMatTensor::Cartesian3d::pointer", "Cartesian3d.h")
         B(0, 0) -= tr / 3.0;
         B(1, 1) -= tr / 3.0;
         B(2, 2) -= tr / 3.0;
-        double m = GM::pointer::hydrostatic_deviatoric(A.data(), C.data());
+        double m = GM::pointer::Hydrostatic_deviatoric(A.data(), C.data());
         REQUIRE(m == Approx(tr / 3.0));
         REQUIRE(xt::allclose(C, B));
     }

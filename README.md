@@ -30,6 +30,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.5.0](#v050)
     - [v0.4.0](#v040)
     - [v0.3.0](#v030)
     - [v0.2.0](#v020)
@@ -77,6 +78,11 @@ This library implements for a Cartesian coordinate frame in 2d or in 3d:
     -   sym(*A*) = `I4s`<sub>ijkl</sub> *A*<sub>lk</sub>
     -   transpose(*A*) = `I4rt`<sub>ijkl</sub> *A*<sub>lk</sub>
 
+For convenience also find:
+
+*   Second (`I2`) and fourth (`I4`) order random tensors, 
+    with each component drawn from a normal distribution.
+
 In addition it provides an `Array<rank>` of unit tensors. 
 Suppose that the array is rank three, with shape (R, S, T), then the output is:
 
@@ -85,35 +91,55 @@ Suppose that the array is rank three, with shape (R, S, T), then the output is:
 
 E.g.
 ```cpp
-auto i = GMatTensor::Array<3>({4, 5, 6}).I2();
-auto i = GMatTensor::Array<3>({4, 5, 6}).I4();
-auto i = GMatTensor::Array<3>({4, 5, 6}).II();
-auto i = GMatTensor::Array<3>({4, 5, 6}).I4d();
-auto i = GMatTensor::Array<3>({4, 5, 6}).I4s();
-auto i = GMatTensor::Array<3>({4, 5, 6}).I4rt();
-auto i = GMatTensor::Array<3>({4, 5, 6}).I4lt();
+auto A = GMatTensor::Array<3>({4, 5, 6}).O2();
+auto A = GMatTensor::Array<3>({4, 5, 6}).O4();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I2();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I4();
+auto A = GMatTensor::Array<3>({4, 5, 6}).II();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I4d();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I4s();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I4rt();
+auto A = GMatTensor::Array<3>({4, 5, 6}).I4lt();
 ```
 
 Given that the arrays are row-major, the tensors or each array component are thus 
 stored contiguously in the memory.
+This is heavily used to expose all operations below to nd-arrays of tensors.
+In particular, all operations are available on raw pointers to a tensor, 
+or for nd-arrays of (x)tensors (include a 'plain' tensor with array rank 0).
 
 ## Tensor operations
 
-*   Taking the hydrostatic and deviatoric of a(n array of) second order tensor(s).
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`). 
+    Returns: scalar (e.g. `(R, S, T)`).
+    -   tr(*A*) = `Trace(A)`
     -   tr(*A*) / *d* = `Hydrostatic(A)`
-    -   dev(*A*) = A - `Hydrostatic(A)` * `I2`
+    -   det(*A*) = `Det(A)`   
+    -   *A*<sub>ij</sub> B<sub>ji</sub> = *A* : *B* = `A2_ddot_B2(A, B)`
+    -   *A*<sub>ij</sub> B<sub>ji</sub> = *A* : *B* = `A2s_ddot_B2s(A, B)`
+        (both tensors assumed symmetric, no assertion).   
+    -   dev(*A*)<sub>ij</sub> dev(A)<sub>ji</sub> = `Norm_deviatoric(A)`
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`). 
+    Returns: 2nd-order tensor (e.g. `(R, S, T, d, d)`).
+    -   dev(*A*) = `A` - `Hydrostatic(A)` * `I2`
     -   dev(*A*) = `Deviatoric(A)`
-*   An equivalent value of the deviatoric part of a(n array of) second order tensor(s).
-    -   dev(*A*)<sub>ij</sub> dev(A)<sub>ji</sub> = `Equivalent_deviatoric(A)`
+    -   *A*<sup>-1</sup> = `Inv(A)`
+    -   log(*A*) = `Logs(A)`
+        (tensor assumed symmetric, no assertion).
+    -   *C*<sub>ik</sub> *A*<sub>ij</sub> A<sub>kj</sub> = *A* . *A*<sup>T</sup> 
+        = `A2_dot_A2T(A, B)`
+    -   *C*<sub>ik</sub> *A*<sub>ij</sub> B<sub>jk</sub> = *A* . *B* = `A2_dot_B2(A, B)`
+    -   *C*<sub>ij</sub> *A*<sub>ijkl</sub> B<sub>lk</sub> = *A* : *B* = `A4_ddot_B2(A, B)`
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`) 
+    or 4th-order tensor (e.g. `(R, S, T, d, d, d)`). 
+    Returns: 4th-order tensor (e.g. `(R, S, T, d, d, d)`).
+    -   *C*<sub>ijkl</sub> *A*<sub>ij</sub> B<sub>kl</sub> = *A* * *B* = `A2_dyadic_B2(A, B)`
+    -   *C*<sub>ijkm</sub> *A*<sub>ijkl</sub> B<sub>lm</sub> = *A* . *B* = `A4_dot_B2(A, B)`
 
 Note that the output has:
 
-*   The same rank of the input: `Deviatoric`.
-*   The rank of the input minus two: `Hydrostatic`, `Equivalent_deviatoric`.
-    -   In the case of an input tensor (input shape `(d, d)`), this results in a rank-zero matrix.
-        To get a scalar do e.g. `Hydrostatic(A)()`.
-    -   In the case of an input array of tensors this results in the array. 
-        E.g. for input shape `(R, S, T, d, d)`, the output shape is `(R, S, T)`.
+-   In the case of an input tensor `(d, d)` the output can  be a rank-zero matrix.
+    To get a scalar do e.g. `Hydrostatic(A)()`.
 
 Furthermore note that:
 
@@ -131,15 +157,17 @@ using the following storage convention:
 *   Cartesian3d: (xx, xy, xz, yx, yy, yz, zx, zy, zz).
 
 This part of the API does not support arrays of tensors.
-The following functions are available:
+In addition to the pointer equivalent (or in fact core) of the above function, 
+the following functions are available:
 
-*   `t = trace(A)`: return the trace *t* = *A*<sub>ii</sub>.
-*   `m = hydrostatic_deviatoric(A, B)`: returns the hydrostatic part of *A* (`== trace(A) / d`),
-    and writes its deviatoric part to *B*.
-*   `deviatoric_ddot_deviatoric(A)`: returns the double-dot product of the deviatoric part of *A*, 
-    dev(*A*)<sub>ij</sub> dev(*A*)<sub>ji</sub>.
-*   `A2_ddot_B2`: returns the double-dot product of *A* and *B*,
-    *A*<sub>ij</sub> *B*<sub>ji</sub>.
+*   `Hydrostatic_deviatoric`: Return the hydrostatic part of a tensor, 
+    and write the deviatoric part to a pointer.
+*   `A4_ddot_B4_ddot_C4`: *A* : *B* : *C*
+*   `A2_dot_B2_dot_C2T`: *A* . *B* . *C*<sup>T</sup> 
+*   `eigs`: Compute the eigen values and eigen vectors for a symmetric 2nd order tensor
+    (no assertion on symmetry).
+*   `from_eigs`: The reverse operation from `eigs`, for a symmetric 2nd order tensor
+    (no assertion on symmetry).
 
 # Implementation
 
@@ -291,6 +319,13 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.5.0
+
+*   Added `A2_dot_B2` to *Cartesian2d*.
+*   API change: **all** functions that return output, including scalars, now start
+    with a capital letter.
+*   Updated readme.
 
 ## v0.4.0
 

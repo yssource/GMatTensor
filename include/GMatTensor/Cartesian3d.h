@@ -205,34 +205,34 @@ namespace pointer {
 
     // Trace of second order tensor
     template <class T>
-    inline T trace(const T* A);
+    inline T Trace(const T* A);
 
     // trace(A) / 3
     template <class T>
-    inline T hydrostatic(const T* A);
+    inline T Hydrostatic(const T* A);
 
     // Determinant
     template <class T>
-    inline T det(const T* A);
+    inline T Det(const T* A);
 
     // inv(A)
     // Returns determinant
     template <class T>
-    inline T inv(const T* A, T* ret);
+    inline T Inv(const T* A, T* ret);
 
     // Deviatoric decomposition of second order tensor
     // Returns hydrostatic part
     // "ret" may be the same as "A"
     template <class T>
-    inline T hydrostatic_deviatoric(const T* A, T* ret);
+    inline T Hydrostatic_deviatoric(const T* A, T* ret);
 
     // dev(A) : dev(A)
     template <class T>
-    inline T deviatoric_ddot_deviatoric(const T* A);
+    inline T Deviatoric_ddot_deviatoric(const T* A);
 
     // sqrt(dev(A) : dev(A))
     template <class T>
-    inline T norm_deviatoric(const T* A);
+    inline T Norm_deviatoric(const T* A);
 
     // A : B
     template <class T>

@@ -88,28 +88,28 @@ template <class T, class R>
 inline void trace(const T& A, R& ret)
 {
     return detail::impl_A2<T, 2>::ret0(A, ret,
-        [](const auto& a){ return pointer::trace(a); });
+        [](const auto& a){ return pointer::Trace(a); });
 }
 
 template <class T>
 inline auto Trace(const T& A)
 {
     return detail::impl_A2<T, 2>::ret0(A,
-        [](const auto& a){ return pointer::trace(a); });
+        [](const auto& a){ return pointer::Trace(a); });
 }
 
 template <class T, class R>
 inline void hydrostatic(const T& A, R& ret)
 {
     return detail::impl_A2<T, 2>::ret0(A, ret,
-        [](const auto& a){ return pointer::hydrostatic(a); });
+        [](const auto& a){ return pointer::Hydrostatic(a); });
 }
 
 template <class T>
 inline auto Hydrostatic(const T& A)
 {
     return detail::impl_A2<T, 2>::ret0(A,
-        [](const auto& a){ return pointer::hydrostatic(a); });
+        [](const auto& a){ return pointer::Hydrostatic(a); });
 }
 
 template <class T, class R>
@@ -144,28 +144,42 @@ template <class T, class R>
 inline void norm_deviatoric(const T& A, R& ret)
 {
     return detail::impl_A2<T, 2>::ret0(A, ret,
-        [](const auto& a){ return pointer::norm_deviatoric(a); });
+        [](const auto& a){ return pointer::Norm_deviatoric(a); });
 }
 
 template <class T>
 inline auto Norm_deviatoric(const T& A)
 {
     return detail::impl_A2<T, 2>::ret0(A,
-        [](const auto& a){ return pointer::norm_deviatoric(a); });
+        [](const auto& a){ return pointer::Norm_deviatoric(a); });
 }
 
 template <class T, class R>
 inline void deviatoric(const T& A, R& ret)
 {
     return detail::impl_A2<T, 2>::ret2(A, ret,
-        [](const auto& a, const auto& r){ return pointer::hydrostatic_deviatoric(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Hydrostatic_deviatoric(a, r); });
 }
 
 template <class T>
 inline auto Deviatoric(const T& A)
 {
     return detail::impl_A2<T, 2>::ret2(A,
-        [](const auto& a, const auto& r){ return pointer::hydrostatic_deviatoric(a, r); });
+        [](const auto& a, const auto& r){ return pointer::Hydrostatic_deviatoric(a, r); });
+}
+
+template <class T, class R>
+inline void A2_dot_B2(const T& A, const T& B, R& ret)
+{
+    return detail::impl_A2<T, 2>::B2_ret2(A, B, ret,
+        [](const auto& a, const auto& b, const auto& r){ return pointer::A2_dot_B2(a, b, r); });
+}
+
+template <class T>
+inline auto A2_dot_B2(const T& A, const T& B)
+{
+    return detail::impl_A2<T, 2>::B2_ret2(A, B,
+        [](const auto& a, const auto& b, const auto& r){ return pointer::A2_dot_B2(a, b, r); });
 }
 
 template <class T, class R>
@@ -302,21 +316,21 @@ namespace pointer {
     }
 
     template <class T>
-    inline T trace(const T* A)
+    inline T Trace(const T* A)
     {
         return A[0] + A[3];
     }
 
     template <class T>
-    inline T hydrostatic(const T* A)
+    inline T Hydrostatic(const T* A)
     {
-        return T(0.5) * trace(A);
+        return T(0.5) * Trace(A);
     }
 
     template <class T>
-    inline T hydrostatic_deviatoric(const T* A, T* ret)
+    inline T Hydrostatic_deviatoric(const T* A, T* ret)
     {
-        T m = hydrostatic(A);
+        T m = Hydrostatic(A);
         ret[0] = A[0] - m;
         ret[1] = A[1];
         ret[2] = A[2];
@@ -325,18 +339,18 @@ namespace pointer {
     }
 
     template <class T>
-    inline T deviatoric_ddot_deviatoric(const T* A)
+    inline T Deviatoric_ddot_deviatoric(const T* A)
     {
-        T m = hydrostatic(A);
+        T m = Hydrostatic(A);
         return (A[0] - m) * (A[0] - m)
              + (A[3] - m) * (A[3] - m)
              + T(2) * A[1] * A[2];
     }
 
     template <class T>
-    inline T norm_deviatoric(const T* A)
+    inline T Norm_deviatoric(const T* A)
     {
-        return std::sqrt(deviatoric_ddot_deviatoric(A));
+        return std::sqrt(Deviatoric_ddot_deviatoric(A));
     }
 
     template <class T>
@@ -368,6 +382,15 @@ namespace pointer {
                 }
             }
         }
+    }
+
+    template <class T>
+    inline void A2_dot_B2(const T* A, const T* B, T* ret)
+    {
+        ret[0] = A[1] * B[2] + A[0] * B[0];
+        ret[1] = A[0] * B[1] + A[1] * B[3];
+        ret[2] = A[2] * B[0] + A[3] * B[2];
+        ret[3] = A[2] * B[1] + A[3] * B[3];
     }
 
     template <class T>

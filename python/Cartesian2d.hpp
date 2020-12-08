@@ -90,6 +90,17 @@ void add2d_Deviatoric(M& module)
         py::arg("A"));
 }
 
+template <class T, class M>
+void add2d_A2_dot_B2(M& module)
+{
+    module.def(
+        "A2_dot_B2",
+        static_cast<T (*)(const T&, const T&)>(&GMatTensor::Cartesian2d::A2_dot_B2<T>),
+        "Product 'A . B' of a (array of) tensor(s).",
+        py::arg("A"),
+        py::arg("B"));
+}
+
 template <class R, class T, class M>
 void add2d_A2_dyadic_B2(M& module)
 {
@@ -147,6 +158,9 @@ void init_Cartesian2d(py::module& m)
     add2d_Deviatoric<xt::xtensor<double, 4>>(m);
     add2d_Deviatoric<xt::xtensor<double, 3>>(m);
     add2d_Deviatoric<xt::xtensor<double, 2>>(m);
+    add2d_A2_dot_B2<xt::xtensor<double, 4>>(m);
+    add2d_A2_dot_B2<xt::xtensor<double, 3>>(m);
+    add2d_A2_dot_B2<xt::xtensor<double, 2>>(m);
     add2d_A2_dyadic_B2<xt::xtensor<double, 6>, xt::xtensor<double, 4>>(m);
     add2d_A2_dyadic_B2<xt::xtensor<double, 5>, xt::xtensor<double, 3>>(m);
     add2d_A2_dyadic_B2<xt::xtensor<double, 4>, xt::xtensor<double, 2>>(m);
