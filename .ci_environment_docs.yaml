@@ -3,4 +3,5 @@ channels:
 dependencies:
   - cmake
   - setuptools_scm
+  - xtensor
   - doxygen
