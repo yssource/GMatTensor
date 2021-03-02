@@ -36,6 +36,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.6.0](#v060)
     - [v0.5.0](#v050)
     - [v0.4.0](#v040)
     - [v0.3.0](#v030)
@@ -326,6 +327,14 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.6.0
+
+*   [docs] Adding doxygen docs published on GitHub pages.
+*   [docs] Minor readme updates.
+*   [CMake] Small tweaks.
+*   [CMake] Relaxing C++17 requirement.
+*   Using setuptools_scm for versioning.
 
 ## v0.5.0
 
