@@ -1,5 +1,5 @@
 /**
-Implementation details.
+Implementation details (not part of public API).
 
 \file detail.hpp
 \copyright Copyright 2020. Tom de Geus. All rights reserved.

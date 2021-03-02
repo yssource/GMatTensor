@@ -1,5 +1,5 @@
 /**
-Defines used in the library.
+Macros used in the library.
 
 \file config.h
 \copyright Copyright 2020. Tom de Geus. All rights reserved.
