@@ -331,6 +331,12 @@ enabling *xsimd*, ...
 
 # Change-log
 
+## v0.7.3
+
+*   Adding cross-compilation features (#35)
+*   Updating doxystyle
+*   Removing xtensor-python work-around
+
 ## v0.7.2
 
 *   Bugfix: type recognition for xtensor-fixed.
@@ -387,7 +393,7 @@ enabling *xsimd*, ...
 
 ## v0.2.0
 
-### Pointer API
+**Pointer API**
 
 *   Making pointer explicit (template `T` -> `T*`).
 *   Adding zero and unit tensors.
