@@ -36,6 +36,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.7.4](#v074)
     - [v0.7.3](#v073)
     - [v0.7.2](#v072)
     - [v0.7.1](#v071)
@@ -330,6 +331,10 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.7.4
+
+*   Allow xsimd from setup.py using `CMAKE_ARGS` (#36)
 
 ## v0.7.3
 
