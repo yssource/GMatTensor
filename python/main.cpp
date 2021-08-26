@@ -12,13 +12,9 @@
 #include "Cartesian2d.hpp"
 #include "Cartesian3d.hpp"
 
-// Enable basic assertions on matrix shape
-// (doesn't cost a lot of time, but avoids segmentation faults)
-#define GMATTENSOR_ENABLE_ASSERT
-
 namespace py = pybind11;
 
-PYBIND11_MODULE(GMatTensor, m)
+PYBIND11_MODULE(_GMatTensor, m)
 {
     xt::import_numpy();
 
