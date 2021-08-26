@@ -36,6 +36,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.7.5](#v075)
     - [v0.7.4](#v074)
     - [v0.7.3](#v073)
     - [v0.7.2](#v072)
@@ -63,7 +64,7 @@ Bug reports or feature requests can be filed on
 As always, the code comes with no guarantee.
 None of the developers can be held responsible for possible mistakes.
 
-Download: 
+Download:
 [.zip file](https://github.com/tdegeus/GMatTensor/zipball/master) |
 [.tar.gz file](https://github.com/tdegeus/GMatTensor/tarball/master).
 
@@ -91,10 +92,10 @@ This library implements for a Cartesian coordinate frame in 2d or in 3d:
 
 For convenience also find:
 
-*   Second (`I2`) and fourth (`I4`) order random tensors, 
+*   Second (`I2`) and fourth (`I4`) order random tensors,
     with each component drawn from a normal distribution.
 
-In addition it provides an `Array<rank>` of unit tensors. 
+In addition it provides an `Array<rank>` of unit tensors.
 Suppose that the array is rank three, with shape (R, S, T), then the output is:
 
 *   Second order tensors: (R, S, T, d, d), with `d` the number of dimensions (2 or 3).
@@ -113,24 +114,24 @@ auto A = GMatTensor::Array<3>({4, 5, 6}).I4rt();
 auto A = GMatTensor::Array<3>({4, 5, 6}).I4lt();
 ```
 
-Given that the arrays are row-major, the tensors or each array component are thus 
+Given that the arrays are row-major, the tensors or each array component are thus
 stored contiguously in the memory.
 This is heavily used to expose all operations below to nd-arrays of tensors.
-In particular, all operations are available on raw pointers to a tensor, 
+In particular, all operations are available on raw pointers to a tensor,
 or for nd-arrays of (x)tensors (include a 'plain' tensor with array rank 0).
 
 ## Tensor operations
 
-*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`). 
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`).
     Returns: scalar (e.g. `(R, S, T)`).
     -   tr(*A*) = `Trace(A)`
     -   tr(*A*) / *d* = `Hydrostatic(A)`
-    -   det(*A*) = `Det(A)`   
+    -   det(*A*) = `Det(A)`
     -   *A*<sub>ij</sub> B<sub>ji</sub> = *A* : *B* = `A2_ddot_B2(A, B)`
     -   *A*<sub>ij</sub> B<sub>ji</sub> = *A* : *B* = `A2s_ddot_B2s(A, B)`
-        (both tensors assumed symmetric, no assertion).   
+        (both tensors assumed symmetric, no assertion).
     -   dev(*A*)<sub>ij</sub> dev(A)<sub>ji</sub> = `Norm_deviatoric(A)`
-*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`). 
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`).
     Returns: 2nd-order tensor (e.g. `(R, S, T, d, d)`).
     -   dev(*A*) = `A` - `Hydrostatic(A)` * `I2`
     -   dev(*A*) = `Deviatoric(A)`
@@ -138,12 +139,12 @@ or for nd-arrays of (x)tensors (include a 'plain' tensor with array rank 0).
     -   *A*<sup>-1</sup> = `Inv(A)`
     -   log(*A*) = `Logs(A)`
         (tensor assumed symmetric, no assertion).
-    -   *C*<sub>ik</sub> *A*<sub>ij</sub> A<sub>kj</sub> = *A* . *A*<sup>T</sup> 
+    -   *C*<sub>ik</sub> *A*<sub>ij</sub> A<sub>kj</sub> = *A* . *A*<sup>T</sup>
         = `A2_dot_A2T(A, B)`
     -   *C*<sub>ik</sub> *A*<sub>ij</sub> B<sub>jk</sub> = *A* . *B* = `A2_dot_B2(A, B)`
     -   *C*<sub>ij</sub> *A*<sub>ijkl</sub> B<sub>lk</sub> = *A* : *B* = `A4_ddot_B2(A, B)`
-*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`) 
-    or 4th-order tensor (e.g. `(R, S, T, d, d, d)`). 
+*   Input: 2nd-order tensor (e.g. `(R, S, T, d, d)`)
+    or 4th-order tensor (e.g. `(R, S, T, d, d, d)`).
     Returns: 4th-order tensor (e.g. `(R, S, T, d, d, d)`).
     -   *C*<sub>ijkl</sub> *A*<sub>ij</sub> B<sub>kl</sub> = *A* * *B* = `A2_dyadic_B2(A, B)`
     -   *C*<sub>ijkm</sub> *A*<sub>ijkl</sub> B<sub>lm</sub> = *A* . *B* = `A4_dot_B2(A, B)`
@@ -162,20 +163,20 @@ Furthermore note that:
 ## Tensor operations (semi-public API)
 
 A semi-public API exists that is mostly aimed to support *GMat* implementation.
-These involve pure-tensor operations based the input (and the output) as a pointer, 
+These involve pure-tensor operations based the input (and the output) as a pointer,
 using the following storage convention:
 
 *   Cartesian2d: (xx, xy, yx, yy).
 *   Cartesian3d: (xx, xy, xz, yx, yy, yz, zx, zy, zz).
 
 This part of the API does not support arrays of tensors.
-In addition to the pointer equivalent (or in fact core) of the above function, 
+In addition to the pointer equivalent (or in fact core) of the above function,
 the following functions are available:
 
-*   `Hydrostatic_deviatoric`: Return the hydrostatic part of a tensor, 
+*   `Hydrostatic_deviatoric`: Return the hydrostatic part of a tensor,
     and write the deviatoric part to a pointer.
 *   `A4_ddot_B4_ddot_C4`: *A* : *B* : *C*
-*   `A2_dot_B2_dot_C2T`: *A* . *B* . *C*<sup>T</sup> 
+*   `A2_dot_B2_dot_C2T`: *A* . *B* . *C*<sup>T</sup>
 *   `eigs`: Compute the eigen values and eigen vectors for a symmetric 2nd order tensor
     (no assertion on symmetry).
 *   `from_eigs`: The reverse operation from `eigs`, for a symmetric 2nd order tensor
@@ -185,13 +186,13 @@ the following functions are available:
 
 ## C++ and Python
 
-The code is a C++ header-only library (see [installation notes](#c-headers)), 
+The code is a C++ header-only library (see [installation notes](#c-headers)),
 but a Python module is also provided (see [installation notes](#python-module)).
 The interfaces are identical except:
 
-+   All *xtensor* objects (`xt::xtensor<...>`) are *NumPy* arrays in Python. 
++   All *xtensor* objects (`xt::xtensor<...>`) are *NumPy* arrays in Python.
     Overloading based on rank is also available in Python.
-+   The Python module cannot change output objects in-place: 
++   The Python module cannot change output objects in-place:
     only functions whose name starts with a capital letter are included, see below.
 +   All `::` in C++ are `.` in Python.
 
@@ -226,22 +227,23 @@ make install
 conda install -c conda-forge python-gmattensor
 ```
 
-Note that *xsimd* and hardware optimisations are **not enabled**. 
+Note that *xsimd* and hardware optimisation are **not enabled**.
 To enable them you have to compile on your system, as is discussed next.
 
 ### From source
 
->   You need *xtensor*, *xtensor-python* and optionally *xsimd* as prerequisites. 
->   Additionally, Python needs to know how to find them. 
+>   You need *xtensor*, *xtensor-python* and optionally *xsimd* as prerequisites.
+>   In addition *scikit-build* is needed to control the build from Python.
 >   The easiest is to use *conda* to get the prerequisites:
-> 
+>
 >   ```bash
 >   conda install -c conda-forge xtensor-python
 >   conda install -c conda-forge xsimd
+>   conda install -c conda-forge scikit-build
 >   ```
->   
->   If you then compile and install with the same environment 
->   you should be good to go. 
+>
+>   If you then compile and install with the same environment
+>   you should be good to go.
 >   Otherwise, a bit of manual labour might be needed to
 >   treat the dependencies.
 
@@ -255,7 +257,11 @@ export CMAKE_ARGS="-DUSE_SIMD=1"
 
 # Compile and install the Python module
 # (-vv can be omitted as is controls just the verbosity)
-python -m pip install . -vv
+python setup.py install --build-type Release -vv
+
+# OR, Compile and install the Python module with hardware optimisation
+# (with scikit-build CMake options can just be added as command-line arguments)
+python setup.py install --build-type Release -DUSE_SIMDD=1 -vv
 ```
 
 # Compiling user-code
@@ -285,7 +291,7 @@ The following targets are available:
     Enables assertions by defining `GMATTENSOR_ENABLE_ASSERT`.
 
 *   `GMatTensor::debug`
-    Enables all assertions by defining 
+    Enables all assertions by defining
     `GMATTENSOR_ENABLE_ASSERT` and `XTENSOR_ENABLE_ASSERT`.
 
 *   `GMatTensor::compiler_warings`
@@ -293,7 +299,7 @@ The following targets are available:
 
 ### Optimisation
 
-It is advised to think about compiler optimization and enabling *xsimd*.
+It is advised to think about compiler optimisation and enabling *xsimd*.
 Using *CMake* this can be done using the `xtensor::optimize` and `xtensor::use_xsimd` targets.
 The above example then becomes:
 
@@ -302,11 +308,12 @@ cmake_minimum_required(VERSION 3.1)
 project(example)
 find_package(GMatTensor REQUIRED)
 find_package(xtensor REQUIRED)
+find_package(xsimd REQUIRED)
 add_executable(example example.cpp)
 target_link_libraries(example PRIVATE GMatTensor xtensor::optimize xtensor::use_xsimd)
 ```
 
-See the [documentation of xtensor](https://xtensor.readthedocs.io/en/latest/) concerning optimization.
+See the [documentation of xtensor](https://xtensor.readthedocs.io/en/latest/) concerning optimisation.
 
 ## By hand
 
@@ -316,7 +323,7 @@ Presuming that the compiler is `c++`, compile using:
 c++ -I/path/to/GMatTensor/include ...
 ```
 
-Note that you have to take care of the *xtensor* dependency, the C++ version, optimization, 
+Note that you have to take care of the *xtensor* dependency, the C++ version, optimisation,
 enabling *xsimd*, ...
 
 ## Using pkg-config
@@ -327,10 +334,14 @@ Presuming that the compiler is `c++`, compile using:
 c++ `pkg-config --cflags GMatTensor` ...
 ```
 
-Note that you have to take care of the *xtensor* dependency, the C++ version, optimization, 
+Note that you have to take care of the *xtensor* dependency, the C++ version, optimization,
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.7.5
+
+*   Switching to scikit-build (#37)
 
 ## v0.7.4
 
@@ -387,7 +398,7 @@ enabling *xsimd*, ...
 *   Introducing null tensors `GMatTensor::Cartesian3d::O2` and `GMatTensor::Cartesian3d::O4`
     (also for Cartesian2d).
 *   Adding several new tensor operations / products.
-*   Adding more public xtensor interface for tensor products. 
+*   Adding more public xtensor interface for tensor products.
     The aim is mostly to allow the user to be quick and dirty, e.g. when testing.
 *   Formatting tests with the latter new API.
 
@@ -412,6 +423,6 @@ enabling *xsimd*, ...
 
 *   Improved sub-classing support
 
-## v0.1.0 
+## v0.1.0
 
 Transfer from other libraries.
