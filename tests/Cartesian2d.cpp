@@ -1,7 +1,7 @@
-#define CATCH_CONFIG_MAIN  // tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-#include <xtensor/xrandom.hpp>
 #include <xtensor/xio.hpp>
+#include <xtensor/xrandom.hpp>
 #ifdef _WIN32
 #include <xtensor/xfixed.hpp>
 #endif
@@ -87,13 +87,13 @@ TEST_CASE("GMatTensor::Cartesian2d", "Cartesian2d.h")
         REQUIRE(xt::allclose(GM::A4_ddot_B2(N.I4d(), M), GM::Deviatoric(GM::Sym(M))));
     }
 
-    #ifndef _WIN32
+#ifndef _WIN32
     SECTION("Trace - Tensor")
     {
         xt::xtensor_fixed<double, xt::fixed_shape<2, 2>> A = {{0, 1}, {2, 3}};
         REQUIRE(GM::Trace(A)() == Approx(A(0, 0) + A(1, 1)));
     }
-    #endif
+#endif
 
     SECTION("Trace - Tensor")
     {

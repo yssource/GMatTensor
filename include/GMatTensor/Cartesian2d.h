@@ -9,11 +9,11 @@
 #ifndef GMATTENSOR_CARTESIAN2D_H
 #define GMATTENSOR_CARTESIAN2D_H
 
-#include <xtensor/xtensor.hpp>
 #include <xtensor/xadapt.hpp>
 #include <xtensor/xnoalias.hpp>
-#include <xtensor/xview.hpp>
 #include <xtensor/xrandom.hpp>
+#include <xtensor/xtensor.hpp>
+#include <xtensor/xview.hpp>
 
 #include "config.h"
 #include "version.h"
@@ -430,10 +430,8 @@ Array of tensors:
 \tparam N The rank of the array (the actual rank is increased with the tensor-rank).
 */
 template <size_t N>
-class Array
-{
+class Array {
 public:
-
     /**
     Rank of the array (the actual rank is increased with the tensor-rank).
     */
@@ -454,7 +452,6 @@ public:
     \return List of size #rank.
     */
     std::array<size_t, N> shape() const;
-
 
     /**
     Array of Cartesian2d::O2()
@@ -513,7 +510,6 @@ public:
     xt::xtensor<double, N + 4> I4d() const;
 
 protected:
-
     /**
     Constructor 'alias'. Can be used by constructor of derived classes.
 
@@ -554,176 +550,176 @@ No arrays of tensors are allowed, hence the input is fixed to:
 */
 namespace pointer {
 
-    /**
-    See Cartesian2d::O2()
+/**
+See Cartesian2d::O2()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void O2(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void O2(T* ret);
 
-    /**
-    See Cartesian2d::O4()
+/**
+See Cartesian2d::O4()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void O4(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void O4(T* ret);
 
-    /**
-    See Cartesian2d::I2()
+/**
+See Cartesian2d::I2()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I2(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I2(T* ret);
 
-    /**
-    See Cartesian2d::II()
+/**
+See Cartesian2d::II()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void II(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void II(T* ret);
 
-    /**
-    See Cartesian2d::I4()
+/**
+See Cartesian2d::I4()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4(T* ret);
 
-    /**
-    See Cartesian2d::I4rt()
+/**
+See Cartesian2d::I4rt()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4rt(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4rt(T* ret);
 
-    /**
-    See Cartesian2d::I4s()
+/**
+See Cartesian2d::I4s()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4s(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4s(T* ret);
 
-    /**
-    See Cartesian2d::I4d()
+/**
+See Cartesian2d::I4d()
 
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4d(T* ret);
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4d(T* ret);
 
-    /**
-    See Cartesian2d::Trace()
+/**
+See Cartesian2d::Trace()
 
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Trace(const T* A);
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Trace(const T* A);
 
-    /**
-    See Cartesian2d::Hydrostatic()
+/**
+See Cartesian2d::Hydrostatic()
 
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Hydrostatic(const T* A);
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Hydrostatic(const T* A);
 
-    /**
-    See Cartesian2d::Sym()
+/**
+See Cartesian2d::Sym()
 
-    \param A 2nd order tensor
-    \param ret 2nd order tensor, may be the same pointer as ``A``
-    */
-    template <class T>
-    inline void sym(const T* A, T* ret);
+\param A 2nd order tensor
+\param ret 2nd order tensor, may be the same pointer as ``A``
+*/
+template <class T>
+inline void sym(const T* A, T* ret);
 
-    /**
-    Returns Cartesian2d::Hydrostatic() and computes Cartesian2d::Deviatoric()
+/**
+Returns Cartesian2d::Hydrostatic() and computes Cartesian2d::Deviatoric()
 
-    \param A 2nd order tensor
-    \param ret 2nd order tensor, may be the same pointer as ``A``
-    \return scalar
-    */
-    template <class T>
-    inline T Hydrostatic_deviatoric(const T* A, T* ret);
+\param A 2nd order tensor
+\param ret 2nd order tensor, may be the same pointer as ``A``
+\return scalar
+*/
+template <class T>
+inline T Hydrostatic_deviatoric(const T* A, T* ret);
 
-    /**
-    Double tensor contraction of the tensor's deviator
+/**
+Double tensor contraction of the tensor's deviator
 
-    \f$ (dev(A))_{ij} (dev(A))_{ji} \f$
+\f$ (dev(A))_{ij} (dev(A))_{ji} \f$
 
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Deviatoric_ddot_deviatoric(const T* A);
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Deviatoric_ddot_deviatoric(const T* A);
 
-    /**
-    See Cartesian2d::Norm_deviatoric()
+/**
+See Cartesian2d::Norm_deviatoric()
 
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Norm_deviatoric(const T* A);
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Norm_deviatoric(const T* A);
 
-    /**
-    See Cartesian2d::A2_ddot_B2()
+/**
+See Cartesian2d::A2_ddot_B2()
 
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T A2_ddot_B2(const T* A, const T* B);
+\param A 2nd order tensor
+\param B 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T A2_ddot_B2(const T* A, const T* B);
 
-    /**
-    See Cartesian2d::A2s_ddot_B2s()
+/**
+See Cartesian2d::A2s_ddot_B2s()
 
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T A2s_ddot_B2s(const T* A, const T* B);
+\param A 2nd order tensor
+\param B 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T A2s_ddot_B2s(const T* A, const T* B);
 
-    /**
-    See Cartesian2d::A2_dyadic_B2()
+/**
+See Cartesian2d::A2_dyadic_B2()
 
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \param ret output 4th order tensor
-    */
-    template <class T>
-    inline void A2_dyadic_B2(const T* A, const T* B, T* ret);
+\param A 2nd order tensor
+\param B 2nd order tensor
+\param ret output 4th order tensor
+*/
+template <class T>
+inline void A2_dyadic_B2(const T* A, const T* B, T* ret);
 
-    /**
-    See Cartesian2d::A2_dot_B2()
+/**
+See Cartesian2d::A2_dot_B2()
 
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \param ret output 2th order tensor
-    */
-    template <class T>
-    inline void A2_dot_B2(const T* A, const T* B, T* ret);
+\param A 2nd order tensor
+\param B 2nd order tensor
+\param ret output 2th order tensor
+*/
+template <class T>
+inline void A2_dot_B2(const T* A, const T* B, T* ret);
 
-    /**
-    See Cartesian2d::A4_ddot_B2()
+/**
+See Cartesian2d::A4_ddot_B2()
 
-    \param A 4th order tensor
-    \param B 2nd order tensor
-    \param ret output 2th order tensor
-    */
-    template <class T>
-    inline void A4_ddot_B2(const T* A, const T* B, T* ret);
+\param A 4th order tensor
+\param B 2nd order tensor
+\param ret output 2th order tensor
+*/
+template <class T>
+inline void A4_ddot_B2(const T* A, const T* B, T* ret);
 
 } // namespace pointer
 

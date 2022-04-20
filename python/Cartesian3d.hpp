@@ -9,10 +9,6 @@
 
 #include <GMatTensor/Cartesian3d.h>
 
-// Enable basic assertions on matrix shape
-// (doesn't cost a lot of time, but avoids segmentation faults)
-#define GMATTENSOR_ENABLE_ASSERT
-
 namespace py = pybind11;
 
 template <class T, class M>
@@ -30,7 +26,7 @@ auto construct_Array_3d(M& self)
 }
 
 template <class R, class T, class M>
-void add3d_Trace(M& module)
+void d3_Trace(M& module)
 {
     module.def(
         "Trace",
@@ -40,7 +36,7 @@ void add3d_Trace(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_trace(M& module)
+void d3_trace(M& module)
 {
     module.def(
         "trace",
@@ -51,7 +47,7 @@ void add3d_trace(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Hydrostatic(M& module)
+void d3_Hydrostatic(M& module)
 {
     module.def(
         "Hydrostatic",
@@ -61,7 +57,7 @@ void add3d_Hydrostatic(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_hydrostatic(M& module)
+void d3_hydrostatic(M& module)
 {
     module.def(
         "hydrostatic",
@@ -72,7 +68,7 @@ void add3d_hydrostatic(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Det(M& module)
+void d3_Det(M& module)
 {
     module.def(
         "Det",
@@ -82,7 +78,7 @@ void add3d_Det(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_det(M& module)
+void d3_det(M& module)
 {
     module.def(
         "det",
@@ -93,7 +89,7 @@ void add3d_det(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_ddot_B2(M& module)
+void d3_A2_ddot_B2(M& module)
 {
     module.def(
         "A2_ddot_B2",
@@ -104,7 +100,7 @@ void add3d_A2_ddot_B2(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_ddot_B2_ret(M& module)
+void d3_A2_ddot_B2_ret(M& module)
 {
     module.def(
         "A2_ddot_B2",
@@ -116,7 +112,7 @@ void add3d_A2_ddot_B2_ret(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2s_ddot_B2s(M& module)
+void d3_A2s_ddot_B2s(M& module)
 {
     module.def(
         "A2s_ddot_B2s",
@@ -127,7 +123,7 @@ void add3d_A2s_ddot_B2s(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2s_ddot_B2s_ret(M& module)
+void d3_A2s_ddot_B2s_ret(M& module)
 {
     module.def(
         "A2s_ddot_B2s",
@@ -139,7 +135,7 @@ void add3d_A2s_ddot_B2s_ret(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Norm_deviatoric(M& module)
+void d3_Norm_deviatoric(M& module)
 {
     module.def(
         "Norm_deviatoric",
@@ -149,7 +145,7 @@ void add3d_Norm_deviatoric(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_norm_deviatoric(M& module)
+void d3_norm_deviatoric(M& module)
 {
     module.def(
         "norm_deviatoric",
@@ -160,7 +156,7 @@ void add3d_norm_deviatoric(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Deviatoric(M& module)
+void d3_Deviatoric(M& module)
 {
     module.def(
         "Deviatoric",
@@ -170,7 +166,7 @@ void add3d_Deviatoric(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_deviatoric(M& module)
+void d3_deviatoric(M& module)
 {
     module.def(
         "deviatoric",
@@ -181,7 +177,7 @@ void add3d_deviatoric(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Sym(M& module)
+void d3_Sym(M& module)
 {
     module.def(
         "Sym",
@@ -191,7 +187,7 @@ void add3d_Sym(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_sym(M& module)
+void d3_sym(M& module)
 {
     module.def(
         "sym",
@@ -202,7 +198,7 @@ void add3d_sym(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Inv(M& module)
+void d3_Inv(M& module)
 {
     module.def(
         "Inv",
@@ -212,7 +208,7 @@ void add3d_Inv(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_inv(M& module)
+void d3_inv(M& module)
 {
     module.def(
         "inv",
@@ -223,7 +219,7 @@ void add3d_inv(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_Logs(M& module)
+void d3_Logs(M& module)
 {
     module.def(
         "Logs",
@@ -233,7 +229,7 @@ void add3d_Logs(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_logs(M& module)
+void d3_logs(M& module)
 {
     module.def(
         "logs",
@@ -244,7 +240,7 @@ void add3d_logs(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dot_A2T(M& module)
+void d3_A2_dot_A2T(M& module)
 {
     module.def(
         "A2_dot_A2T",
@@ -254,7 +250,7 @@ void add3d_A2_dot_A2T(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dot_A2T_ret(M& module)
+void d3_A2_dot_A2T_ret(M& module)
 {
     module.def(
         "A2_dot_A2T",
@@ -265,7 +261,7 @@ void add3d_A2_dot_A2T_ret(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dot_B2(M& module)
+void d3_A2_dot_B2(M& module)
 {
     module.def(
         "A2_dot_B2",
@@ -276,7 +272,7 @@ void add3d_A2_dot_B2(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dot_B2_ret(M& module)
+void d3_A2_dot_B2_ret(M& module)
 {
     module.def(
         "A2_dot_B2",
@@ -288,7 +284,7 @@ void add3d_A2_dot_B2_ret(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dyadic_B2(M& module)
+void d3_A2_dyadic_B2(M& module)
 {
     module.def(
         "A2_dyadic_B2",
@@ -299,7 +295,7 @@ void add3d_A2_dyadic_B2(M& module)
 }
 
 template <class R, class T, class M>
-void add3d_A2_dyadic_B2_ret(M& module)
+void d3_A2_dyadic_B2_ret(M& module)
 {
     module.def(
         "A2_dyadic_B2",
@@ -311,7 +307,7 @@ void add3d_A2_dyadic_B2_ret(M& module)
 }
 
 template <class R, class T, class U, class M>
-void add3d_A4_ddot_B2(M& module)
+void d3_A4_ddot_B2(M& module)
 {
     module.def(
         "A4_ddot_B2",
@@ -322,7 +318,7 @@ void add3d_A4_ddot_B2(M& module)
 }
 
 template <class R, class T, class U, class M>
-void add3d_A4_ddot_B2_ret(M& module)
+void d3_A4_ddot_B2_ret(M& module)
 {
     module.def(
         "A4_ddot_B2",
@@ -334,7 +330,7 @@ void add3d_A4_ddot_B2_ret(M& module)
 }
 
 template <class R, class T, class U, class M>
-void add3d_A4_dot_B2(M& module)
+void d3_A4_dot_B2(M& module)
 {
     module.def(
         "A4_dot_B2",
@@ -345,7 +341,7 @@ void add3d_A4_dot_B2(M& module)
 }
 
 template <class R, class T, class U, class M>
-void add3d_A4_dot_B2_ret(M& module)
+void d3_A4_dot_B2_ret(M& module)
 {
     module.def(
         "A4_dot_B2",
@@ -373,125 +369,125 @@ void init_Cartesian3d(py::module& m)
 
     // Tensor algebra
 
-    add3d_Trace<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_Trace<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_Trace<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_Trace<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_Trace<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_Trace<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_trace<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_trace<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_trace<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_trace<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_trace<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_trace<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_Hydrostatic<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_Hydrostatic<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_Hydrostatic<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_Hydrostatic<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_Hydrostatic<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_Hydrostatic<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_hydrostatic<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_hydrostatic<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_hydrostatic<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_hydrostatic<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_hydrostatic<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_hydrostatic<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_Det<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_Det<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_Det<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_Det<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_Det<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_Det<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_det<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_det<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_det<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_det<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_det<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_det<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_ddot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_A2_ddot_B2<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_A2_ddot_B2<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_A2_ddot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_A2_ddot_B2<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_A2_ddot_B2<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_ddot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_A2_ddot_B2_ret<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_A2_ddot_B2_ret<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_A2_ddot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_A2_ddot_B2_ret<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_A2_ddot_B2_ret<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2s_ddot_B2s<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_A2s_ddot_B2s<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_A2s_ddot_B2s<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_A2s_ddot_B2s<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_A2s_ddot_B2s<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_A2s_ddot_B2s<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2s_ddot_B2s_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_A2s_ddot_B2s_ret<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_A2s_ddot_B2s_ret<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_A2s_ddot_B2s_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_A2s_ddot_B2s_ret<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_A2s_ddot_B2s_ret<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_Norm_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_Norm_deviatoric<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_Norm_deviatoric<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_Norm_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_Norm_deviatoric<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_Norm_deviatoric<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_norm_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
-    add3d_norm_deviatoric<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
-    add3d_norm_deviatoric<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
+    d3_norm_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 4>>(m);
+    d3_norm_deviatoric<xt::pytensor<double, 1>, xt::pytensor<double, 3>>(m);
+    d3_norm_deviatoric<xt::pytensor<double, 0>, xt::pytensor<double, 2>>(m);
 
-    add3d_Deviatoric<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_Deviatoric<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_Deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_Deviatoric<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_Deviatoric<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_Deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_deviatoric<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_deviatoric<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_deviatoric<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_deviatoric<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_deviatoric<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_Sym<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_Sym<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_Sym<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_Sym<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_Sym<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_Sym<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_sym<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_sym<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_sym<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_sym<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_sym<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_sym<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_Inv<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_Inv<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_Inv<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_Inv<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_Inv<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_Inv<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_inv<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_inv<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_inv<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_inv<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_inv<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_inv<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_Logs<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_Logs<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_Logs<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_Logs<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_Logs<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_Logs<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_logs<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_logs<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_logs<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_logs<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_logs<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_logs<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dot_A2T<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dot_A2T<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dot_A2T<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_A2_dot_A2T<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_A2_dot_A2T<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_A2_dot_A2T<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dot_A2T_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dot_A2T_ret<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dot_A2T_ret<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_A2_dot_A2T_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_A2_dot_A2T_ret<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_A2_dot_A2T_ret<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dot_B2<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_A2_dot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_A2_dot_B2<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_A2_dot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dot_B2_ret<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
+    d3_A2_dot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>>(m);
+    d3_A2_dot_B2_ret<xt::pytensor<double, 3>, xt::pytensor<double, 3>>(m);
+    d3_A2_dot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dyadic_B2<xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dyadic_B2<xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dyadic_B2<xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A2_dyadic_B2<xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A2_dyadic_B2<xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A2_dyadic_B2<xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
-    add3d_A2_dyadic_B2_ret<xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A2_dyadic_B2_ret<xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A2_dyadic_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A2_dyadic_B2_ret<xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A2_dyadic_B2_ret<xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A2_dyadic_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
-    add3d_A4_ddot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A4_ddot_B2<xt::pytensor<double, 3>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A4_ddot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A4_ddot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A4_ddot_B2<xt::pytensor<double, 3>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A4_ddot_B2<xt::pytensor<double, 2>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
-    add3d_A4_ddot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A4_ddot_B2_ret<xt::pytensor<double, 3>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A4_ddot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A4_ddot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A4_ddot_B2_ret<xt::pytensor<double, 3>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A4_ddot_B2_ret<xt::pytensor<double, 2>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
-    add3d_A4_dot_B2<xt::pytensor<double, 6>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A4_dot_B2<xt::pytensor<double, 5>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A4_dot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A4_dot_B2<xt::pytensor<double, 6>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A4_dot_B2<xt::pytensor<double, 5>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A4_dot_B2<xt::pytensor<double, 4>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
-    add3d_A4_dot_B2_ret<xt::pytensor<double, 6>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
-    add3d_A4_dot_B2_ret<xt::pytensor<double, 5>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
-    add3d_A4_dot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
+    d3_A4_dot_B2_ret<xt::pytensor<double, 6>, xt::pytensor<double, 6>, xt::pytensor<double, 4>>(m);
+    d3_A4_dot_B2_ret<xt::pytensor<double, 5>, xt::pytensor<double, 5>, xt::pytensor<double, 3>>(m);
+    d3_A4_dot_B2_ret<xt::pytensor<double, 4>, xt::pytensor<double, 4>, xt::pytensor<double, 2>>(m);
 
     // Array
 

@@ -9,11 +9,11 @@
 #ifndef GMATTENSOR_CARTESIAN3D_H
 #define GMATTENSOR_CARTESIAN3D_H
 
-#include <xtensor/xtensor.hpp>
 #include <xtensor/xadapt.hpp>
 #include <xtensor/xnoalias.hpp>
-#include <xtensor/xview.hpp>
 #include <xtensor/xrandom.hpp>
+#include <xtensor/xtensor.hpp>
+#include <xtensor/xview.hpp>
 
 #include "config.h"
 #include "version.h"
@@ -542,10 +542,8 @@ Array of tensors:
 \tparam N The rank of the array (the actual rank is increased with the tensor-rank).
 */
 template <size_t N>
-class Array
-{
+class Array {
 public:
-
     /**
     Rank of the array (the actual rank is increased with the tensor-rank).
     */
@@ -566,7 +564,6 @@ public:
     \return List of size #rank.
     */
     std::array<size_t, N> shape() const;
-
 
     /**
     Array of Cartesian3d::O2()
@@ -625,7 +622,6 @@ public:
     xt::xtensor<double, N + 4> I4d() const;
 
 protected:
-
     /**
     Constructor 'alias'. Can be used by constructor of derived classes.
 
@@ -666,283 +662,283 @@ No arrays of tensors are allowed, hence the input is fixed to:
 */
 namespace pointer {
 
-    /**
-    See Cartesian3d::O2()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void O2(T* ret);
-
-    /**
-    See Cartesian3d::O4()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void O4(T* ret);
-
-    /**
-    See Cartesian3d::I2()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I2(T* ret);
-
-    /**
-    See Cartesian3d::II()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void II(T* ret);
-
-    /**
-    See Cartesian3d::I4()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4(T* ret);
-
-    /**
-    See Cartesian3d::I4rt()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4rt(T* ret);
-
-    /**
-    See Cartesian3d::I4s()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4s(T* ret);
-
-    /**
-    See Cartesian3d::I4d()
-
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void I4d(T* ret);
-
-    /**
-    See Cartesian3d::Trace()
-
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Trace(const T* A);
-
-    /**
-    See Cartesian3d::Hydrostatic()
-
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Hydrostatic(const T* A);
-
-    /**
-    See Cartesian3d::Det()
-
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Det(const T* A);
-
-    /**
-    See Cartesian3d::Sym()
-
-    \param A 2nd order tensor
-    \param ret 2nd order tensor, may be the same pointer as ``A``
-    */
-    template <class T>
-    inline void sym(const T* A, T* ret);
-
-    /**
-    See Cartesian3d::Inv(), returns Cartesian3d::Det()
-
-    \param A 2nd order tensor
-    \param ret 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Inv(const T* A, T* ret);
-
-    /**
-    Returns Cartesian3d::Hydrostatic() and computes Cartesian3d::Deviatoric()
-
-    \param A 2nd order tensor
-    \param ret 2nd order tensor, may be the same pointer as ``A``
-    \return scalar
-    */
-    template <class T>
-    inline T Hydrostatic_deviatoric(const T* A, T* ret);
-
-    /**
-    Double tensor contraction of the tensor's deviator
-
-    \f$ (dev(A))_{ij} (dev(A))_{ji} \f$
-
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Deviatoric_ddot_deviatoric(const T* A);
-
-    /**
-    See Cartesian3d::Norm_deviatoric()
-
-    \param A 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T Norm_deviatoric(const T* A);
-
-    /**
-    See Cartesian3d::A2_ddot_B2()
-
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T A2_ddot_B2(const T* A, const T* B);
-
-    /**
-    See Cartesian3d::A2s_ddot_B2s()
-
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \return scalar
-    */
-    template <class T>
-    inline T A2s_ddot_B2s(const T* A, const T* B);
-
-    /**
-    See Cartesian3d::A2_dyadic_B2()
-
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \param ret output 4th order tensor
-    */
-    template <class T>
-    inline void A2_dyadic_B2(const T* A, const T* B, T* ret);
-
-    /**
-    See Cartesian3d::A4_dot_B2()
-
-    \param A 4th order tensor
-    \param B 2nd order tensor
-    \param ret output 4th order tensor
-    */
-    template <class T>
-    inline void A4_dot_B2(const T* A, const T* B, T* ret);
-
-    /**
-    See Cartesian3d::A2_dot_B2()
-
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void A2_dot_B2(const T* A, const T* B, T* ret);
-
-    /**
-    See Cartesian3d::A2_dot_A2T()
-
-    \param A 2nd order tensor
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void A2_dot_A2T(const T* A, T* ret);
-
-    /**
-    See Cartesian3d::A4_ddot_B2()
-
-    \param A 4th order tensor
-    \param B 2nd order tensor
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void A4_ddot_B2(const T* A, const T* B, T* ret);
-
-    /**
-    Product
-
-    \f$ A : B : C \f$
-
-    or in index notation
-
-    \f$ D_{ijop} = A_{ijkl} B_{lkmn} C_{nmop} \f$
-
-    \param A 4th order tensor
-    \param B 4th order tensor
-    \param C 4th order tensor
-    \param ret output 4th order tensor
-    */
-    template <class T>
-    inline void A4_ddot_B4_ddot_C4(const T* A, const T* B, const T* C, T* ret);
-
-    /**
-    Product
-
-    \f$ A \cdot B \cdot C^T \f$
-
-    or in index notation
-
-    \f$ D_{il} = A_{ij} B_{jk} C_{lk} \f$
-
-    \param A 2nd order tensor
-    \param B 2nd order tensor
-    \param C 2nd order tensor
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    inline void A2_dot_B2_dot_C2T(const T* A, const T* B, const T* C, T* ret);
-
-    /**
-    Get eigenvalues/-vectors such that
-
-    \f$ A_{ij} = \lambda^a v^a_i v^a_j \f$
-
-    Symmetric tensors only, no assertion.
-
-    \param A 2nd order tensor
-    \param vec eigenvectors (storage as 2nd order tensor), \f$ v^a_i \f$ = ``vec[i, a]``
-    \param val eigenvalues (storage as vector), \f$ \lambda^a \f$ = ``val[a]``
-
-    */
-    template <class T>
-    void eigs(const T* A, T* vec, T* val);
-
-    /**
-    Reconstruct tensor from eigenvalues/-vectors (reverse operation of eigs())
-    Symmetric tensors only, no assertion.
-
-    \param vec eigenvectors (storage as 2nd order tensor), \f$ v^a_i \f$ = ``vec[i, a]``
-    \param val eigenvalues (storage as vector), \f$ \lambda^a \f$ = ``val[a]``
-    \param ret 2nd order tensor
-    */
-    template <class T>
-    void from_eigs(const T* vec, const T* val, T* ret);
-
-    /**
-    See Cartesian3d::Logs()
-
-    \param A 2nd order tensor
-    \param ret output 2nd order tensor
-    */
-    template <class T>
-    void logs(const T* A, T* ret);
+/**
+See Cartesian3d::O2()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void O2(T* ret);
+
+/**
+See Cartesian3d::O4()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void O4(T* ret);
+
+/**
+See Cartesian3d::I2()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I2(T* ret);
+
+/**
+See Cartesian3d::II()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void II(T* ret);
+
+/**
+See Cartesian3d::I4()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4(T* ret);
+
+/**
+See Cartesian3d::I4rt()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4rt(T* ret);
+
+/**
+See Cartesian3d::I4s()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4s(T* ret);
+
+/**
+See Cartesian3d::I4d()
+
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void I4d(T* ret);
+
+/**
+See Cartesian3d::Trace()
+
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Trace(const T* A);
+
+/**
+See Cartesian3d::Hydrostatic()
+
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Hydrostatic(const T* A);
+
+/**
+See Cartesian3d::Det()
+
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Det(const T* A);
+
+/**
+See Cartesian3d::Sym()
+
+\param A 2nd order tensor
+\param ret 2nd order tensor, may be the same pointer as ``A``
+*/
+template <class T>
+inline void sym(const T* A, T* ret);
+
+/**
+See Cartesian3d::Inv(), returns Cartesian3d::Det()
+
+\param A 2nd order tensor
+\param ret 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Inv(const T* A, T* ret);
+
+/**
+Returns Cartesian3d::Hydrostatic() and computes Cartesian3d::Deviatoric()
+
+\param A 2nd order tensor
+\param ret 2nd order tensor, may be the same pointer as ``A``
+\return scalar
+*/
+template <class T>
+inline T Hydrostatic_deviatoric(const T* A, T* ret);
+
+/**
+Double tensor contraction of the tensor's deviator
+
+\f$ (dev(A))_{ij} (dev(A))_{ji} \f$
+
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Deviatoric_ddot_deviatoric(const T* A);
+
+/**
+See Cartesian3d::Norm_deviatoric()
+
+\param A 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T Norm_deviatoric(const T* A);
+
+/**
+See Cartesian3d::A2_ddot_B2()
+
+\param A 2nd order tensor
+\param B 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T A2_ddot_B2(const T* A, const T* B);
+
+/**
+See Cartesian3d::A2s_ddot_B2s()
+
+\param A 2nd order tensor
+\param B 2nd order tensor
+\return scalar
+*/
+template <class T>
+inline T A2s_ddot_B2s(const T* A, const T* B);
+
+/**
+See Cartesian3d::A2_dyadic_B2()
+
+\param A 2nd order tensor
+\param B 2nd order tensor
+\param ret output 4th order tensor
+*/
+template <class T>
+inline void A2_dyadic_B2(const T* A, const T* B, T* ret);
+
+/**
+See Cartesian3d::A4_dot_B2()
+
+\param A 4th order tensor
+\param B 2nd order tensor
+\param ret output 4th order tensor
+*/
+template <class T>
+inline void A4_dot_B2(const T* A, const T* B, T* ret);
+
+/**
+See Cartesian3d::A2_dot_B2()
+
+\param A 2nd order tensor
+\param B 2nd order tensor
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void A2_dot_B2(const T* A, const T* B, T* ret);
+
+/**
+See Cartesian3d::A2_dot_A2T()
+
+\param A 2nd order tensor
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void A2_dot_A2T(const T* A, T* ret);
+
+/**
+See Cartesian3d::A4_ddot_B2()
+
+\param A 4th order tensor
+\param B 2nd order tensor
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void A4_ddot_B2(const T* A, const T* B, T* ret);
+
+/**
+Product
+
+\f$ A : B : C \f$
+
+or in index notation
+
+\f$ D_{ijop} = A_{ijkl} B_{lkmn} C_{nmop} \f$
+
+\param A 4th order tensor
+\param B 4th order tensor
+\param C 4th order tensor
+\param ret output 4th order tensor
+*/
+template <class T>
+inline void A4_ddot_B4_ddot_C4(const T* A, const T* B, const T* C, T* ret);
+
+/**
+Product
+
+\f$ A \cdot B \cdot C^T \f$
+
+or in index notation
+
+\f$ D_{il} = A_{ij} B_{jk} C_{lk} \f$
+
+\param A 2nd order tensor
+\param B 2nd order tensor
+\param C 2nd order tensor
+\param ret output 2nd order tensor
+*/
+template <class T>
+inline void A2_dot_B2_dot_C2T(const T* A, const T* B, const T* C, T* ret);
+
+/**
+Get eigenvalues/-vectors such that
+
+\f$ A_{ij} = \lambda^a v^a_i v^a_j \f$
+
+Symmetric tensors only, no assertion.
+
+\param A 2nd order tensor
+\param vec eigenvectors (storage as 2nd order tensor), \f$ v^a_i \f$ = ``vec[i, a]``
+\param val eigenvalues (storage as vector), \f$ \lambda^a \f$ = ``val[a]``
+
+*/
+template <class T>
+void eigs(const T* A, T* vec, T* val);
+
+/**
+Reconstruct tensor from eigenvalues/-vectors (reverse operation of eigs())
+Symmetric tensors only, no assertion.
+
+\param vec eigenvectors (storage as 2nd order tensor), \f$ v^a_i \f$ = ``vec[i, a]``
+\param val eigenvalues (storage as vector), \f$ \lambda^a \f$ = ``val[a]``
+\param ret 2nd order tensor
+*/
+template <class T>
+void from_eigs(const T* vec, const T* val, T* ret);
+
+/**
+See Cartesian3d::Logs()
+
+\param A 2nd order tensor
+\param ret output 2nd order tensor
+*/
+template <class T>
+void logs(const T* A, T* ret);
 
 } // namespace pointer
 

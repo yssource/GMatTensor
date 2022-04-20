@@ -9,8 +9,8 @@ Macros used in the library.
 #ifndef GMATTENSOR_CONFIG_H
 #define GMATTENSOR_CONFIG_H
 
-#include <string>
 #include <algorithm>
+#include <string>
 
 /**
 \cond
@@ -54,6 +54,7 @@ The advantage is that:
 /**
 Tensor products / operations.
 */
-namespace GMatTensor { }
+namespace GMatTensor {
+}
 
 #endif

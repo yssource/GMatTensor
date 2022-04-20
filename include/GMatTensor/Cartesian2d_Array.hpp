@@ -43,7 +43,7 @@ inline xt::xtensor<double, N + 2> Array<N>::O2() const
 {
     xt::xtensor<double, N + 2> ret = xt::empty<double>(m_shape_tensor2);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::O2(&ret.data()[i * m_stride_tensor2]);
     }
@@ -56,7 +56,7 @@ inline xt::xtensor<double, N + 4> Array<N>::O4() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::O4(&ret.data()[i * m_stride_tensor4]);
     }
@@ -69,7 +69,7 @@ inline xt::xtensor<double, N + 2> Array<N>::I2() const
 {
     xt::xtensor<double, N + 2> ret = xt::empty<double>(m_shape_tensor2);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::I2(&ret.data()[i * m_stride_tensor2]);
     }
@@ -82,7 +82,7 @@ inline xt::xtensor<double, N + 4> Array<N>::II() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::II(&ret.data()[i * m_stride_tensor4]);
     }
@@ -95,7 +95,7 @@ inline xt::xtensor<double, N + 4> Array<N>::I4() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::I4(&ret.data()[i * m_stride_tensor4]);
     }
@@ -108,7 +108,7 @@ inline xt::xtensor<double, N + 4> Array<N>::I4rt() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::I4rt(&ret.data()[i * m_stride_tensor4]);
     }
@@ -121,7 +121,7 @@ inline xt::xtensor<double, N + 4> Array<N>::I4s() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::I4s(&ret.data()[i * m_stride_tensor4]);
     }
@@ -134,7 +134,7 @@ inline xt::xtensor<double, N + 4> Array<N>::I4d() const
 {
     xt::xtensor<double, N + 4> ret = xt::empty<double>(m_shape_tensor4);
 
-    #pragma omp parallel for
+#pragma omp parallel for
     for (size_t i = 0; i < m_size; ++i) {
         Cartesian2d::pointer::I4d(&ret.data()[i * m_stride_tensor4]);
     }

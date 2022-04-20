@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_MAIN  // tells Catch to provide a main() - only do this in one cpp file
-#include <catch2/catch.hpp>
-#include <xtensor/xrandom.hpp>
-#include <xtensor/xio.hpp>
+#define CATCH_CONFIG_MAIN
 #include <GMatTensor/Cartesian3d.h>
+#include <catch2/catch.hpp>
+#include <xtensor/xio.hpp>
+#include <xtensor/xrandom.hpp>
 
 namespace GM = GMatTensor::Cartesian3d;
 
@@ -327,14 +327,10 @@ TEST_CASE("GMatTensor::Cartesian3d", "Cartesian3d.h")
         double gamma = 0.02;
 
         xt::xtensor<double, 2> F = {
-            {1.0 + gamma, 0.0, 0.0},
-            {0.0, 1.0 / (1.0 + gamma), 0.0},
-            {0.0, 0.0, 1.0}};
+            {1.0 + gamma, 0.0, 0.0}, {0.0, 1.0 / (1.0 + gamma), 0.0}, {0.0, 0.0, 1.0}};
 
         xt::xtensor<double, 2> Eps = {
-            {std::log(1.0 + gamma), 0.0, 0.0},
-            {0.0, - std::log(1.0 + gamma), 0.0},
-            {0.0, 0.0, 0.0}};
+            {std::log(1.0 + gamma), 0.0, 0.0}, {0.0, -std::log(1.0 + gamma), 0.0}, {0.0, 0.0, 0.0}};
 
         REQUIRE(xt::allclose(GM::Logs(F), Eps));
     }
@@ -351,13 +347,11 @@ TEST_CASE("GMatTensor::Cartesian3d", "Cartesian3d.h")
                     double gamma = r(i, j, k);
 
                     xt::xtensor<double, 2> F = {
-                        {1.0 + gamma, 0.0, 0.0},
-                        {0.0, 1.0 / (1.0 + gamma), 0.0},
-                        {0.0, 0.0, 1.0}};
+                        {1.0 + gamma, 0.0, 0.0}, {0.0, 1.0 / (1.0 + gamma), 0.0}, {0.0, 0.0, 1.0}};
 
                     xt::xtensor<double, 2> Eps = {
                         {std::log(1.0 + gamma), 0.0, 0.0},
-                        {0.0, - std::log(1.0 + gamma), 0.0},
+                        {0.0, -std::log(1.0 + gamma), 0.0},
                         {0.0, 0.0, 0.0}};
 
                     xt::view(M, i, j, k, xt::all(), xt::all()) = F;
@@ -372,15 +366,10 @@ TEST_CASE("GMatTensor::Cartesian3d", "Cartesian3d.h")
     {
         double a = 1.1;
 
-        xt::xtensor<double, 2> A = {
-            {1.0, a, 0.0},
-            {0.0, 1.0, 0.0},
-            {0.0, 0.0, 1.0}};
+        xt::xtensor<double, 2> A = {{1.0, a, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
         xt::xtensor<double, 2> B = {
-            {1.0 + std::pow(a, 2.0), a, 0.0},
-            {a, 1.0, 0.0},
-            {0.0, 0.0, 1.0}};
+            {1.0 + std::pow(a, 2.0), a, 0.0}, {a, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
         REQUIRE(xt::allclose(GM::A2_dot_A2T(A), B));
     }
@@ -396,15 +385,10 @@ TEST_CASE("GMatTensor::Cartesian3d", "Cartesian3d.h")
 
                     double a = r(i, j, k);
 
-                    xt::xtensor<double, 2> A = {
-                        {1.0, a, 0.0},
-                        {0.0, 1.0, 0.0},
-                        {0.0, 0.0, 1.0}};
+                    xt::xtensor<double, 2> A = {{1.0, a, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
                     xt::xtensor<double, 2> B = {
-                        {1.0 + std::pow(a, 2.0), a, 0.0},
-                        {a, 1.0, 0.0},
-                        {0.0, 0.0, 1.0}};
+                        {1.0 + std::pow(a, 2.0), a, 0.0}, {a, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 
                     xt::view(M, i, j, k, xt::all(), xt::all()) = A;
                     xt::view(R, i, j, k, xt::all(), xt::all()) = B;

@@ -5,9 +5,12 @@
 */
 
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #define FORCE_IMPORT_ARRAY
 #include <xtensor-python/pytensor.hpp>
+
+#include <GMatTensor/version.h>
 
 #include "Cartesian2d.hpp"
 #include "Cartesian3d.hpp"
@@ -20,9 +23,7 @@ PYBIND11_MODULE(_GMatTensor, m)
 
     m.doc() = "Tensor operations and unit tensors support GMat models";
 
-    m.def("version",
-          &GMatTensor::version,
-          "Return version string.");
+    m.def("version", &GMatTensor::version, "Return version string.");
 
     {
         py::module sm = m.def_submodule("Cartesian2d", "2d Cartesian coordinates");
