@@ -495,10 +495,12 @@ void init_Cartesian3d(py::module& m)
 
     // Array
 
+    py::class_<M::Array<0>> array0d(m, "Array0d");
     py::class_<M::Array<1>> array1d(m, "Array1d");
     py::class_<M::Array<2>> array2d(m, "Array2d");
     py::class_<M::Array<3>> array3d(m, "Array3d");
 
+    construct_Array_3d<M::Array<0>>(array0d);
     construct_Array_3d<M::Array<1>>(array1d);
     construct_Array_3d<M::Array<2>>(array2d);
     construct_Array_3d<M::Array<3>>(array3d);
