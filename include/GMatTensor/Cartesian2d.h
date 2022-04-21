@@ -1,6 +1,4 @@
 /**
-2d Cartesian coordinate system.
-
 \file
 \copyright Copyright 2020. Tom de Geus. All rights reserved.
 \license This project is released under the MIT License.
@@ -508,6 +506,26 @@ public:
     \return [shape(), 2, 2, 2, 2]
     */
     xt::xtensor<double, N + 4> I4d() const;
+
+    /**
+    Return a view of the `i`th second order tensor.
+    For example, consider an array `A` of shape `[M, N, 3, 3]` and you want to obtain the tensor
+    `A[m, n, :, :]` then you should call `view_tensor2(A, m * N + n)`.
+
+    \param var The variable to view (careful not to operate a view that is out-of-scope).
+    \param i The index of the flat storage of the corresponding scalar array.
+    */
+    template <class T>
+    auto view_tensor2(T& var, size_t i) const;
+
+    /**
+    Similar to view_tensor2() for fourth order tensors.
+
+    \param var The variable to view (careful not to operate a view that is out-of-scope).
+    \param i The index of the flat storage of the corresponding scalar array.
+    */
+    template <class T>
+    auto view_tensor4(T& var, size_t i) const;
 
 protected:
     /**
