@@ -36,6 +36,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.8.0](#v080)
     - [v0.7.5](#v075)
     - [v0.7.4](#v074)
     - [v0.7.3](#v073)
@@ -338,6 +339,14 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.8.0
+
+*   [BREAKING CHANGE] Moving "allocate" to public namespace (#42)
+*   Array of tensors: returning underlying shape/size (#43)
+*   Array: adding function to 'view' a tensor (rank 2 or 4) (#41)
+*   auto-format (#40)
+*   [Python] Adding 0d array
 
 ## v0.7.5
 
