@@ -36,6 +36,7 @@ Tensor definitions supporting several GMat models.
     - [By hand](#by-hand)
     - [Using pkg-config](#using-pkg-config)
 - [Change-log](#change-log)
+    - [v0.9.0](#v090)
     - [v0.8.0](#v080)
     - [v0.7.5](#v075)
     - [v0.7.4](#v074)
@@ -339,6 +340,13 @@ Note that you have to take care of the *xtensor* dependency, the C++ version, op
 enabling *xsimd*, ...
 
 # Change-log
+
+## v0.9.0
+
+*   Type alias `xt::xtensor`: allows full API to use `xt::pytensor` (#44)
+*   [BREAKING CHANGE] Python: `shape*`: function -> property (#44)
+*   [BREAKING CHANGE] Remove view_tensor* (re-rolls #41) (#44)
+*   [docs] Adding update script
 
 ## v0.8.0
 
